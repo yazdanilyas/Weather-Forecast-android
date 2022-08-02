@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="oneCall"
+            type="com.example.weatherapp.customData.models.openWeatherModels.OneCallModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:padding="@dimen/_20sp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Islamabad, Pakistan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTemperature"
+            setCurrentTempDegree="@{oneCall.current}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgWeatherIcon"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocation"
+            tools:text="19\u00b0" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgWeatherIcon"
+            setCurrentWeatherImg="@{oneCall}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTemperature"
+            app:layout_constraintEnd_toStartOf="@+id/txtTemperature"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtTemperature" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/imgWeatherIcon"
+            android:id="@+id/minMaxView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imgWeatherIcon">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/minMaxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/min_max"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/minTemp"
+                setTemperature="@{oneCall.daily.get(0)}"
+                temprature="@{1}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:paddingHorizontal="@dimen/_3dp"
+                android:text="40"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toRightOf="@+id/minMaxLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_3dp"
+                android:text="@string/slash"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toRightOf="@+id/minTemp"
+                app:layout_constraintRight_toLeftOf="@id/maxTemp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maxTemp"
+                setTemperature="@{oneCall.daily.get(0)}"
+                temprature="@{2}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_3dp"
+                android:text="60"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toRightOf="@+id/minTemp"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtWeatherDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{oneCall.current.weather.get(0).description}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTemperature"
+            app:layout_constraintStart_toStartOf="@+id/txtTemperature"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemperature"
+            tools:text="Clear" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/minMaxView">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtAirPressure"
+                setAirPressure="@{oneCall}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/txtHumidity"
+                tools:text="Pressure" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtHumidity"
+                setHumidity="@{oneCall}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_15dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/txtAirPressure"
+                app:layout_constraintStart_toEndOf="@+id/txtAirPressure"
+                tools:text="Clear" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

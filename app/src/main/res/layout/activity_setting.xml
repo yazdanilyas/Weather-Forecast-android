@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10dp"
+    tools:context=".ui.activities.setting.SettingActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/LabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10dp"
+        android:text="@string/select_unit"
+        android:textSize="@dimen/_15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/LabelTV">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/celsiusRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15dp"
+            android:text="@string/celsius" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/fahrenheitRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15dp"
+            android:text="@string/fahrenheit" />
+
+    </RadioGroup>
+</androidx.constraintlayout.widget.ConstraintLayout>
