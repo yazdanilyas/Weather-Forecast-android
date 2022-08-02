@@ -112,11 +112,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCompleteLocation(): String {
-        val city = PrefUtils.getString(this, CommonKeys.KEY_CITY)
-        val country = PrefUtils.getString(
+        var city = PrefUtils.getString(this, CommonKeys.KEY_CITY)
+        var country = PrefUtils.getString(
             this,
             CommonKeys.KEY_COUNTRY
         )
+        if (city == null)
+            city = "-"
+        if (country == null)
+            country = "-"
+
         return "$city,$country"
     }
 
@@ -138,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         //set alarm
         alarmMgr?.setRepeating(
             AlarmManager.RTC_WAKEUP,
-           calendar.timeInMillis,
+            calendar.timeInMillis,
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
